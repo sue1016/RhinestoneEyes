@@ -22,9 +22,10 @@ loader
    .add("images/pigu2.png")
    .add("images/door.png")
    .load(setup)
+   
 let pigu,door, state;
-var piguTexture1 = PIXI.Texture.fromFrame('images/pigu1.png');
-var piguTexture2 = PIXI.Texture.fromFrame('images/pigu2.png');
+var piguTexture1 = resources["images/pigu1.png"];
+var piguTexture2 = resources["images/pigu2.png"];
 function setup() {
 
   //Create the `pigu` sprite 
