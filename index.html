@@ -26,15 +26,22 @@ loader
    .add("images/door.png")
    .add("images/brick.png")
    .add("images/box.png")
+   .add("images/treasure.png")
    .load(setup)
    
 let pigu,door, state;
 function setup() {
+
+  var treasureTexture = PIXI.loader.resources["images/treasure.png"].texture;
   var piguTexture1 = PIXI.loader.resources["images/pigu1.png"].texture;
   var piguTexture2 = PIXI.loader.resources["images/pigu2.png"].texture;
+//  var treasureTexture = PIXI.loader.resources["images/treasure.png"].texture;
   var backgroundContainer = new PIXI.Container();
-
+  var treasureContainer = new PIXI.Container();
+  
+ 
   app.stage.addChild(backgroundContainer);
+  app.stage.addChild(treasureContainer);
   var brickTexture = PIXI.loader.resources["images/brick.png"].texture;
   for (var i = 0; i < AppWidth/atomSize; i++)
   {
@@ -47,14 +54,24 @@ function setup() {
               brick.height = atomSize;
               brick.x = i * atomSize;
               brick.y = j * atomSize;
-      console.log(brick.x);
-      console.log(brick.y);
+      //console.log(brick.x);
+     // console.log(brick.y);
               backgroundContainer.addChild(brick);
-      console.log("add one");
+     // console.log("add one");
  
 	    }
     } 
   }
+    var treasure = new Sprite(treasureTexture);
+    treasure.x = 200;
+    treasure.y = 200;
+    console.log(treasure.x);
+    console.log(treasure.y);
+    treasure.width = atomSize;
+    treasure.height = (atomSize/4)*3;
+    backgroundContainer.addChild(treasure);
+    console.log("one more treasure");
+
   //Create the `pigu` sprite 
   pigu = new Sprite(piguTexture2);
   door = new Sprite(resources["images/door.png"].texture);
@@ -173,6 +190,11 @@ function play(delta) {
   pigu.x += pigu.vx;
   pigu.y += pigu.vy
   
+  var rate = 3;
+  var rand = Math.ceil(Math.random()*100);
+  if(rand < rate)
+  {
+  }
 	  if(hitTestRectangle(pigu,door)){
 	   richText.visible = true;
            richText.interactive = true;	   
