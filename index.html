@@ -24,10 +24,9 @@ loader
    .load(setup)
    
 let pigu,door, state;
-var piguTexture1 = resources["images/pigu1.png"];
-var piguTexture2 = resources["images/pigu2.png"];
 function setup() {
-
+  var piguTexture1 = PIXI.loader.resources["images/pigu1.png"].texture;
+  var piguTexture2 = PIXI.loader.resources["images/pigu2.png"].texture;
   //Create the `pigu` sprite 
   pigu = new Sprite(piguTexture1);
   door = new Sprite(resources["images/door.png"].texture);
@@ -53,6 +52,7 @@ function setup() {
   //Left arrow key `press` method
   left.press = () => {
     //Change the pigu's velocity when the key is pressed
+    pigu.setTexture(piguTexture1);
     if(lastHor == "right")
     {
         pigu.scale.x *= -1;
@@ -67,6 +67,7 @@ function setup() {
     //If the left arrow has been released, and the right arrow isn't down,
     //and the pigu isn't moving vertically:
     //Stop the pigu
+    pigu.setTexture(piguTexture2);
     if (!right.isDown && pigu.vy === 0) {
       pigu.vx = 0;
     }
@@ -74,10 +75,12 @@ function setup() {
 
   //Up
   up.press = () => {
+    pigu.setTexture(piguTexture1);
     pigu.vy = -5;
     pigu.vx = 0;
   };
   up.release = () => {
+    pigu.setTexture(piguTexture2);
     if (!down.isDown && pigu.vx === 0) {
       pigu.vy = 0;
     }
@@ -103,10 +106,12 @@ function setup() {
 
   //Down
   down.press = () => {
+    pigu.setTexture(piguTexture1);
     pigu.vy = 5;
     pigu.vx = 0;
   };
   down.release = () => {
+    pigu.setTexture(piguTexture2);
     if (!up.isDown && pigu.vx === 0) {
       pigu.vy = 0;
     }
