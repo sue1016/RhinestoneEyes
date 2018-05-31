@@ -14,9 +14,9 @@ let Application = PIXI.Application,
     TextureCache = PIXI.utils.TextureCache,
     Sprite = PIXI.Sprite,
     Rectangle = PIXI.Rectangle;
-let AppWidth = 1200;
+let AppWidth = 1300;
 let AppHeight = 800;
-let atomSize = 100;
+let atomSize = 50;
 var app = new PIXI.Application(AppWidth, AppHeight, {backgroundColor: 0x1099bb});
 document.body.appendChild(app.view);
 //Define any variables that are used in more than one function
@@ -38,29 +38,34 @@ function setup() {
   var brickTexture = PIXI.loader.resources["images/brick.png"].texture;
   for (var i = 0; i < AppWidth/atomSize; i++)
   {
-    var brick = new PIXI.Sprite(brickTexture);
-    brick.width = atomSize;
-    brick.height = atomSize;
     for(var j = 0; j < AppHeight/atomSize; j++)
-    {
-      brick.x = i * atomSize;
-      brick.y = j * atomSize;
+    { 
+	    if( (i == 0 || i == (AppWidth/atomSize-1)) || (j == 0 || j == (AppHeight/atomSize-1)))
+	    {
+	      var brick = new PIXI.Sprite(brickTexture);
+              brick.width = atomSize;
+              brick.height = atomSize;
+              brick.x = i * atomSize;
+              brick.y = j * atomSize;
       console.log(brick.x);
       console.log(brick.y);
-      backgroundContainer.addChild(brick);
+              backgroundContainer.addChild(brick);
+      console.log("add one");
+ 
+	    }
     } 
-}
+  }
   //Create the `pigu` sprite 
-  pigu = new Sprite(piguTexture1);
+  pigu = new Sprite(piguTexture2);
   door = new Sprite(resources["images/door.png"].texture);
   pigu.x = 200;
   pigu.y = 96; 
   door.x = 1000;
   door.y = 400;
-  door.width = 90;
-  door.height = 90;
-  pigu.width = 100;
-  pigu.height = 100;
+  door.width = atomSize;
+  door.height = atomSize;
+  pigu.width = atomSize;
+  pigu.height = atomSize;
   pigu.vx = 0;
   pigu.vy = 0;
   app.stage.addChild(pigu);
