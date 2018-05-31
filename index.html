@@ -36,7 +36,8 @@ function setup() {
 
   app.stage.addChild(backgroundContainer);
   var brickTexture = PIXI.loader.resources["images/brick.png"].texture;
-  for (var i = 0; i < AppWidth/atomSize; i++) {
+  for (var i = 0; i < AppWidth/atomSize; i++)
+  {
     var brick = new PIXI.Sprite(brickTexture);
     brick.width = atomSize;
     brick.height = atomSize;
@@ -44,6 +45,8 @@ function setup() {
     {
       brick.x = i * atomSize;
       brick.y = j * atomSize;
+      console.log(brick.x);
+      console.log(brick.y);
       backgroundContainer.addChild(brick);
     } 
 }
