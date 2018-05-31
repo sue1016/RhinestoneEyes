@@ -14,7 +14,10 @@ let Application = PIXI.Application,
     TextureCache = PIXI.utils.TextureCache,
     Sprite = PIXI.Sprite,
     Rectangle = PIXI.Rectangle;
-var app = new PIXI.Application(1200, 800, {backgroundColor: 0x1099bb});
+let AppWidth = 1200;
+let AppHeight = 800;
+let atomSize = 100;
+var app = new PIXI.Application(AppWidth, AppHeight, {backgroundColor: 0x1099bb});
 document.body.appendChild(app.view);
 //Define any variables that are used in more than one function
 loader
@@ -33,12 +36,16 @@ function setup() {
 
   app.stage.addChild(backgroundContainer);
   var brickTexture = PIXI.loader.resources["images/brick.png"].texture;
-  for (var i = 0; i < 25; i++) {
+  for (var i = 0; i < AppWidth/atomSize; i++) {
     var brick = new PIXI.Sprite(brickTexture);
-    brick.anchor.set(0.5);
-    brick.x = (i % 5) * 40;
-    brick.y = Math.floor(i / 5) * 40;
-    backgroundContainer.addChild(brick);
+    brick.width = atomSize;
+    brick.height = atomSize;
+    for(var j = 0; j < AppHeight/atomSize; j++)
+    {
+      brick.x = i * atomSize;
+      brick.y = j * atomSize;
+      backgroundContainer.addChild(brick);
+    } 
 }
   //Create the `pigu` sprite 
   pigu = new Sprite(piguTexture1);
