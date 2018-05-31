@@ -18,27 +18,29 @@ var app = new PIXI.Application(1200, 800, {backgroundColor: 0x1099bb});
 document.body.appendChild(app.view);
 //Define any variables that are used in more than one function
 loader
-   .add("images/cat.png")
+   .add("images/pigu1.png")
+   .add("images/pigu2.png")
    .add("images/door.png")
    .load(setup)
-let cat,door, state;
-
+let pigu,door, state;
+var piguTexture1 = PIXI.Texture.fromFrame('images/pigu1.png');
+var piguTexture2 = PIXI.Texture.fromFrame('images/pigu2.png');
 function setup() {
 
-  //Create the `cat` sprite 
-  cat = new Sprite(resources["images/cat.png"].texture);
+  //Create the `pigu` sprite 
+  pigu = new Sprite(piguTexture1);
   door = new Sprite(resources["images/door.png"].texture);
-  cat.x = 200;
-  cat.y = 96; 
+  pigu.x = 200;
+  pigu.y = 96; 
   door.x = 1000;
   door.y = 400;
   door.width = 90;
   door.height = 90;
-  cat.width = 100;
-  cat.height = 100;
-  cat.vx = 0;
-  cat.vy = 0;
-  app.stage.addChild(cat);
+  pigu.width = 100;
+  pigu.height = 100;
+  pigu.vx = 0;
+  pigu.vy = 0;
+  app.stage.addChild(pigu);
   app.stage.addChild(door);
   //Capture the keyboard arrow keys
   let left = keyboard(37),
@@ -49,61 +51,63 @@ function setup() {
   let lastVer = "";
   //Left arrow key `press` method
   left.press = () => {
-    //Change the cat's velocity when the key is pressed
+    //Change the pigu's velocity when the key is pressed
     if(lastHor == "right")
     {
-        cat.scale.x *= -1;
+        pigu.scale.x *= -1;
     }
-    cat.vx = -5;
-    cat.vy = 0;
+    pigu.vx = -5;
+    pigu.vy = 0;
     lastHor = "left";
   };
   
   //Left arrow key `release` method
   left.release = () => {
     //If the left arrow has been released, and the right arrow isn't down,
-    //and the cat isn't moving vertically:
-    //Stop the cat
-    if (!right.isDown && cat.vy === 0) {
-      cat.vx = 0;
+    //and the pigu isn't moving vertically:
+    //Stop the pigu
+    if (!right.isDown && pigu.vy === 0) {
+      pigu.vx = 0;
     }
   };
 
   //Up
   up.press = () => {
-    cat.vy = -5;
-    cat.vx = 0;
+    pigu.vy = -5;
+    pigu.vx = 0;
   };
   up.release = () => {
-    if (!down.isDown && cat.vx === 0) {
-      cat.vy = 0;
+    if (!down.isDown && pigu.vx === 0) {
+      pigu.vy = 0;
     }
   };
 
   //Right
   right.press = () => {
-    cat.anchor.x = 1
+    pigu.setTexture(piguTexture1);
+    pigu.anchor.x = 1
     if(lastHor == "left"){
-          cat.scale.x *= -1;
+          pigu.scale.x *= -1;
     }
-    cat.vx = 5;
-    cat.vy = 0;
+    pigu.vx = 5;
+    pigu.vy = 0;
     lastHor = "right"
   };
   right.release = () => {
-    if (!left.isDown && cat.vy === 0) {
-      cat.vx = 0;
+    pigu.setTexture(piguTexture2);
+    if (!left.isDown && pigu.vy === 0) {
+      pigu.vx = 0;
     }
   };
 
   //Down
   down.press = () => {
-    cat.vy = 5;
-    cat.vx = 0;
+    pigu.vy = 5;
+    pigu.vx = 0;
   };
   down.release = () => {
-    if (!up.isDown && cat.vx === 0) {
-      cat.vy = 0;
+    if (!up.isDown && pigu.vx === 0) {
+      pigu.vy = 0;
     }
   };
 
@@ -122,11 +126,11 @@ function gameLoop(delta){
 
 function play(delta) {
 
-  //Use the cat's velocity to make it move
-  cat.x += cat.vx;
-  cat.y += cat.vy
+  //Use the pigu's velocity to make it move
+  pigu.x += pigu.vx;
+  pigu.y += pigu.vy
   
-	  if(hitTestRectangle(cat,door)){
+	  if(hitTestRectangle(pigu,door)){
 	   richText.visible = true;
            richText.interactive = true;	   
 	  }	  
