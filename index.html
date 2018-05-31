@@ -49,11 +49,12 @@ function setup() {
       down = keyboard(40);
   let lastHor = "left";
   let lastVer = "";
+  let bounceY = 50;
   //Left arrow key `press` method
   left.press = () => {
     //Change the pigu's velocity when the key is pressed
     pigu.setTexture(piguTexture1);
-    pigu.y = pigu.y + 10;
+    pigu.y = pigu.y + bounceY;
     if(lastHor == "right")
     {
         pigu.scale.x *= -1;
@@ -69,7 +70,7 @@ function setup() {
     //and the pigu isn't moving vertically:
     //Stop the pigu
     pigu.setTexture(piguTexture2);
-    pigu.y = pigu.y - 10;
+    pigu.y = pigu.y - bounceY;
     if (!right.isDown && pigu.vy === 0) {
       pigu.vx = 0;
     }
@@ -78,13 +79,13 @@ function setup() {
   //Up
   up.press = () => {
     pigu.setTexture(piguTexture1);
-    pigu.y = pigu.y + 10;
+    pigu.y = pigu.y + bounceY;
     pigu.vy = -5;
     pigu.vx = 0;
   };
   up.release = () => {
     pigu.setTexture(piguTexture2);
-    pigu.y = pigu.y - 10;
+    pigu.y = pigu.y - bounceY;
     if (!down.isDown && pigu.vx === 0) {
       pigu.vy = 0;
     }
@@ -93,7 +94,7 @@ function setup() {
   //Right
   right.press = () => {
     pigu.setTexture(piguTexture1);
-    pigu.y = pigu.y + 10;
+    pigu.y = pigu.y + bounceY;
     pigu.anchor.x = 1
     if(lastHor == "left"){
           pigu.scale.x *= -1;
@@ -104,7 +105,7 @@ function setup() {
   };
   right.release = () => {
     pigu.setTexture(piguTexture2);
-    pigu.y = pigu.y - 10;
+    pigu.y = pigu.y - bounceY;
     if (!left.isDown && pigu.vy === 0) {
       pigu.vx = 0;
     }
@@ -113,13 +114,13 @@ function setup() {
   //Down
   down.press = () => {
     pigu.setTexture(piguTexture1);
-    pigu.y = pigu.y + 10;
+    pigu.y = pigu.y + bounceY;
     pigu.vy = 5;
     pigu.vx = 0;
   };
   down.release = () => {
     pigu.setTexture(piguTexture2);
-    pigu.y = pigu.y - 10;
+    pigu.y = pigu.y - bounceY;
     if (!up.isDown && pigu.vx === 0) {
       pigu.vy = 0;
     }
