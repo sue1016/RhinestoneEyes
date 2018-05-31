@@ -17,6 +17,18 @@ let Application = PIXI.Application,
 let AppWidth = 1300;
 let AppHeight = 800;
 let atomSize = 50;
+let X = AppWidth/atomSize;
+let Y = AppHeight/atomSize;
+let margin = 1;
+let treasureMap  = new Array();
+for(var x = margin; x < X - margin ; x++)
+{
+  a[i] = new Array();
+  for(var y = margin; y < Y - margin; y++)
+  {
+    a[x][y] = 0;
+  }
+}
 var app = new PIXI.Application(AppWidth, AppHeight, {backgroundColor: 0x1099bb});
 document.body.appendChild(app.view);
 //Define any variables that are used in more than one function
